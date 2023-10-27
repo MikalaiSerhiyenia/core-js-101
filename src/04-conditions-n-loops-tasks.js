@@ -216,10 +216,24 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let start; let end; let startIncl; let
+    endIncl;
+  if (a < b) {
+    start = a;
+    end = b;
+    startIncl = isStartIncluded;
+    endIncl = isEndIncluded;
+  } else {
+    start = b;
+    end = a;
+    startIncl = isEndIncluded;
+    endIncl = isStartIncluded;
+  }
+  const startBracket = startIncl ? '[' : '(';
+  const endBracket = endIncl ? ']' : ')';
+  return `${startBracket}${start}, ${end}${endBracket}`;
 }
-
 /**
  * Reverse the specified string (put all chars in reverse order)
  *
@@ -232,10 +246,9 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  return str.split('').reverse().join('');
 }
-
 /**
  * Reverse the specified integer number (put all digits in reverse order)
  *
@@ -248,10 +261,10 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  return +num.toString().split('').reverse().join('');
 }
-
+reverseInteger(12345);
 /**
  * Validates the CCN (credit card number) and return true if CCN is valid
  * and false otherwise.
@@ -272,8 +285,21 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let sum = 0;
+  const ccnStr = ccn.toString();
+  const parity = ccnStr.length % 2;
+  for (let i = 0; i < ccnStr.length; i += 1) {
+    let digit = +ccnStr[i];
+    if (i % 2 === parity) {
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
+      }
+    }
+    sum += digit;
+  }
+  return +(sum % 10) === 0;
 }
 
 /**
