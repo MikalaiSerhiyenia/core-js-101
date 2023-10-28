@@ -217,8 +217,10 @@ function findFirstSingleChar(str) {
  *
  */
 function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
-  let start; let end; let startIncl; let
-    endIncl;
+  let start;
+  let end;
+  let startIncl;
+  let endIncl;
   if (a < b) {
     start = a;
     end = b;
@@ -316,8 +318,13 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const digits = num
+    .toString()
+    .split('')
+    .map((item) => +item);
+  const sum = digits.reduce((acc, curr) => acc + curr, 0);
+  return sum > 9 ? getDigitalRoot(sum) : sum;
 }
 
 /**
@@ -365,8 +372,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 /**
